@@ -6,136 +6,127 @@ import java.util.Random;
 
 public class Game {
 
+	private static final int BOARD_SIZE = 8;
+
+	private String[][] board = {
+			{ "⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬜" },
+			{ "⬜", "⬜", "⬜", "⬛", "⬛", "⬛", "⬜", "⬜" },
+			{ "⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬛", "⬜" },
+			{ "⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬛", "⬜" },
+			{ "⬜", "⬜", "⬜", "⬜", "⬜", "⬛", "⬜", "⬜" },
+			{ "⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬛", "⬜" },
+			{ "⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬛", "⬜" },
+			{ "⬜", "⬜", "⬜", "⬛", "⬛", "⬛", "⬜", "⬜" } };
+
+	private int player = 0;
+
 	public void play() {
-		int player = 0;
-		String[][] board = {{"⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬜"},
-				{"⬜", "⬜", "⬜", "⬛", "⬛", "⬛", "⬜", "⬜"},
-				{"⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬛", "⬜"},
-				{"⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬛", "⬜"},
-				{"⬜", "⬜", "⬜", "⬜", "⬜", "⬛", "⬜", "⬜"},
-				{"⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬛", "⬜"},
-				{"⬜", "⬜", "⬜", "⬜", "⬜", "⬜", "⬛", "⬜"},
-				{"⬜", "⬜", "⬜", "⬛", "⬛", "⬛", "⬜", "⬜"}};
-
-		for(String[] row : board) {
-			for(String elem : row)
-				System.out.print(" " + elem + " ");
-			System.out.println("");
-		}
+		displayBoard();
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
 
-		for(int i=0; i<board[0].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[1].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[2].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[3].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[4].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[5].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[6].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[7].length; i++) board[0][i] = "⬜";
-		board[1][3] = "⬛"; board[1][4] = "⬛"; board[1][5] = "⬛";
-		board[2][2] = "⬛"; board[2][5] = "⬛"; 
-		board[3][6] = "⬛"; 
-		board[4][5] = "⬛"; 
-		board[5][4] = "⬛"; 
-		board[6][3] = "⬛"; 
-		board[7][2] = "⬛"; board[7][3] = "⬛"; board[7][4] = "⬛"; board[7][5] = "⬛"; board[7][6] = "⬛";
+		addCarsToRow(1, 3, 5);
+		addCarsToRow(2, 2, 5);
+		addCarsToRow(3, 6);
+		addCarsToRow(4, 5);
+		addCarsToRow(5, 4);
+		addCarsToRow(6, 3);
+		addCarsToRow(7, 2, 3, 4, 5, 6);
 
-		for(String[] row : board) {
-			for(String r : row)
-				System.out.print(" " + r + " ");
-			System.out.println("");
-		}
+		displayBoard();
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
 
-		for(int i=0; i<board[0].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[1].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[2].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[3].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[4].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[5].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[6].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[7].length; i++) board[0][i] = "⬜";
-		board[1][4] = "⬛"; 
-		board[2][3] = "⬛"; board[2][3] = "⬛"; 
-		board[3][4] = "⬛"; 
-		board[4][4] = "⬛"; 
-		board[5][4] = "⬛"; 
-		board[6][4] = "⬛"; 
-		board[7][2] = "⬛"; board[7][3] = "⬛"; board[7][4] = "⬛"; board[7][5] = "⬛"; 
-
-		for(String[] row : board) {
-			for(String r : row)
-				System.out.print(" " + r + " ");
-			System.out.println("");
-		}
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
-
-		for(int i=0; i<board[0].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[1].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[2].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[3].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[4].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[5].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[6].length; i++) board[0][i] = "⬜";
-		for(int i=0; i<board[7].length; i++) board[0][i] = "⬜";
+		clearRow(0);
+		clearRow(1, 4);
+		clearRow(2, 3);
+		clearRow(3, 4);
+		clearRow(4, 4);
+		clearRow(5, 4);
+		clearRow(6, 4);
+		clearRow(7);
 
 		boolean playing = true;
-		while(playing) {
+		while (playing) {
 			try {
 				Random r = new Random();
 				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-				int newCar = r.nextInt(8);
+				int newCar = r.nextInt(BOARD_SIZE);
 				board[0][newCar] = "🚙";
 				board[7][player] = "🚗";
-				
-				for(String[] row : board) {
-					for(String a : row)
-						System.out.print(" " + a + " ");
-					System.out.println("");
-				}
 
-				//input
+				displayBoard();
+
+				// input
 				String key = br.readLine();
 
-				if(key.equals("q")) {
+				if (key.equals("q")) {
 					playing = false;
 					break;
-				} else if(key.equals("a") && player > 0) {
-					board[7][player] = "⬜";
-					player -= 1;
-				} else if(key.equals("d") && player < 7) {
-					board[7][player] = "⬜";
-					player += 1;
+				} else if (key.equals("a") && player > 0) {
+					movePlayer(-1);
+				} else if (key.equals("d") && player < BOARD_SIZE - 1) {
+					movePlayer(1);
 				}
-				if(board[7][player].equals("🚙") || board[6][player].equals("🚙")) {
+
+				if (board[7][player].equals("🚙") || board[6][player].equals("🚙")) {
 					playing = false;
 					System.out.println("Perdiste!");
 
-					//move cars down
-					for(int i=0; i<7; i++) 
-						board[7-i] = board[6-i];
+					// move cars down
+					for (int i = 0; i < BOARD_SIZE - 1; i++) {
+						board[7 - i] = board[6 - i].clone();
+					}
 
-					for(int i=0; i<board[0].length; i++) board[0][i] = "⬜";
+					clearRow(0);
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 
+	private void displayBoard() {
+		for (String[] row : board) {
+			for (String elem : row)
+				System.out.print(" " + elem + " ");
+			System.out.println("");
+		}
+	}
+
+	private void addCarsToRow(int row, int... columns) {
+		for (int col : columns) {
+			board[row][col] = "⬛";
+		}
+	}
+
+	private void clearRow(int row, int... excludeColumns) {
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			if (!contains(excludeColumns, i)) {
+				board[row][i] = "⬜";
+			}
+		}
+	}
+
+	private void movePlayer(int offset) {
+		board[7][player] = "⬜";
+		player += offset;
+	}
+
+	private boolean contains(int[] array, int target) {
+		for (int value : array) {
+			if (value == target) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public static void main(String[] args) {
 		Game game = new Game();
